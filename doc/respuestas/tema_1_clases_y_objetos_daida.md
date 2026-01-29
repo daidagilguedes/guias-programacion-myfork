@@ -85,25 +85,25 @@ Esto permite ofrecer comportamientos similares adaptados a distintas situaciones
 ## 8. Ejemplo mínimo de clase en Java, que se llame Punto, con dos atributos, x e y, con un método que se llame `calculaDistanciaAOrigen`, que calcule la distancia a la posición 0,0. Por sencillez, los atributos deben tener visibilidad por defecto. Crea además un ejemplo de uso con una instancia y uso del método
 
 ### Respuesta
-class Punto {
-     double x;
-     double y;
+     class Punto {
+          double x;
+          double y;
 
 
-    double calculaDistanciaAOrigen() {
+     double calculaDistanciaAOrigen() {
         return Math.sqrt(x * x + y * y);
     }
-}
+         }
 
 
-class PruebaPunto {
-    public static void main(String[] args) {
-        Punto p = new Punto();
-        p.x = 3;
-        p.y = 4;
-        System.out.println(p.calculaDistanciaAOrigen());
-    }
-}
+     class PruebaPunto {
+         public static void main(String[] args) {
+             Punto p = new Punto();
+             p.x = 3;
+             p.y = 4;
+             System.out.println(p.calculaDistanciaAOrigen());
+         }
+     }
 Este ejemplo muestra una clase simple con atributos y un método, así como la creación y uso de una instancia.
 
 ## 9. ¿Cuál es el punto de entrada en un programa en Java? ¿Qué es `static` y para qué vale? ¿Sólo se emplea para ese método `main`? ¿Para qué se combina con `final`?
@@ -131,18 +131,18 @@ La palabra clave new se utiliza para crear un nuevo objeto en memoria a partir d
 
 Un constructor es un método especial que se ejecuta al crear un objeto y sirve para inicializar sus atributos.
 
-class Empleado {
-    String dni;
-    String nombre;
-    String apellidos;
+     class Empleado {
+         String dni;
+         String nombre;
+         String apellidos;
 
 
-    Empleado(String dni, String nombre, String apellidos) {
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
-}
+         Empleado(String dni, String nombre, String apellidos) {
+             this.dni = dni;
+             this.nombre = nombre;
+             this.apellidos = apellidos;
+         }
+     }
 
 ## 12. ¿Qué es la referencia `this`? ¿Se llama igual en todos los lenguajes? Pon un ejemplo del uso de `this` en la clase `Punto`
 
@@ -151,18 +151,18 @@ La referencia this apunta al objeto actual que está ejecutando el método. Perm
 
 No todos los lenguajes usan el mismo nombre, aunque el concepto es similar. En Java se utiliza this.
 
-double calculaDistanciaAOrigen() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
-}
+     double calculaDistanciaAOrigen() {
+         return Math.sqrt(this.x * this.x + this.y * this.y);
+     }
 
 ## 13. Añade ahora otro nuevo método que se llame `distanciaA`, que reciba un `Punto` como parámetro y calcule la distancia entre `this` y el punto proporcionado
 
 ### Respuesta
-double distanciaA(Punto otro) {
-    double dx = this.x - otro.x;
-    double dy = this.y - otro.y;
-    return Math.sqrt(dx * dx + dy * dy);
-}
+     double distanciaA(Punto otro) {
+         double dx = this.x - otro.x;
+         double dy = this.y - otro.y;
+         return Math.sqrt(dx * dx + dy * dy);
+     }
 
 Este método calcula la distancia entre dos puntos utilizando sus coordenadas.
 
@@ -182,10 +182,10 @@ El método toString() devuelve una representación en texto del objeto. Existe e
 
 Se utiliza, por ejemplo, al imprimir un objeto por consola.
 
-@Override
-public String toString() {
-    return "(" + x + ", " + y + ")";
-}
+     @Override
+     public String toString() {
+         return "(" + x + ", " + y + ")";
+     }
 
 ## 16. Reflexiona: ¿una clase es como un `struct` en C? ¿Qué le falta al `struct` para ser como una clase y las variables de ese tipo ser instancias?
 
@@ -201,13 +201,13 @@ Por ello, una clase ofrece un modelo mucho más completo.
 ### Respuesta
 En C se podría definir un struct con las coordenadas y una función externa que reciba el struct como parámetro.
 
-typedef struct {
-    double x;
-    double y;
-} Punto;
+     typedef struct {
+         double x;
+         double y;
+     } Punto;
 
-double distanciaAOrigen(Punto p) {
-    return sqrt(p.x * p.x + p.y * p.y);
-}
+     double distanciaAOrigen(Punto p) {
+         return sqrt(p.x * p.x + p.y * p.y);
+     }
 
 En este caso, this se sustituye por el parámetro explícito que representa al punto sobre el que se opera.
