@@ -42,22 +42,22 @@ La ocultación de información es la herramienta que permite proteger estas inva
 
 A continuación, se presenta el código de la clase solicitada aplicando los principios de ocultación:
 
-  public class Punto {
-      // Atributos privados: Ocultación de información
-      private double x;
-      private double y;
+    public class Punto {
+        // Atributos privados: Ocultación de información
+        private double x;
+        private double y;
 
-      // Constructor público
-      public Punto(double x, double y) {
-          this.x = x;
-          this.y = y;
-      }
+        // Constructor público
+        public Punto(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
 
-      // Método público para calcular la distancia
-      public double calcularDistanciaAOrigen() {
-          return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-      }
-  }
+        // Método público para calcular la distancia
+        public double calcularDistanciaAOrigen() {
+            return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+        }
+    }
 
 La interfaz pública de esta clase está compuesta por el constructor Punto(double x, double y) y el método calcularDistanciaAOrigen(). Respecto a los modificadores:
 Public: Significa que el miembro es accesible desde cualquier otra clase o parte del programa.
@@ -75,12 +75,12 @@ En otros lenguajes, la gestión varía notablemente. En C++, por ejemplo, el fun
 
 ## 8. Responde: Los miembros de instancia privados de un objeto están ocultos para (a) otras clases o (b) otras instancias, aunque sean de la misma clase. Pon un ejemplo añadiendo un método `calcularDistanciaAPunto(Punto otro)` y explica la respuesta.
 
-  public double calcularDistanciaAPunto(Punto otro) {
-      // Es posible acceder a otro.x y otro.y porque estamos dentro de la clase Punto
-      double diferenciaX = this.x - otro.x;
-      double diferenciaY = this.y - otro.y;
-      return Math.sqrt(diferenciaX * diferenciaX + diferenciaY * diferenciaY);
-  }
+    public double calcularDistanciaAPunto(Punto otro) {
+        // Es posible acceder a otro.x y otro.y porque estamos dentro de la clase Punto
+        double diferenciaX = this.x - otro.x;
+        double diferenciaY = this.y - otro.y;
+        return Math.sqrt(diferenciaX * diferenciaX + diferenciaY * diferenciaY);
+    }
 
 Este código compila y funciona porque, aunque x e y sean privados, el código está escrito dentro de la clase Punto, lo que le otorga permiso para acceder a los miembros privados de cualquier objeto de tipo Punto.
 
@@ -106,35 +106,35 @@ Sí, tiene mucho sentido en diversos escenarios de diseño de software. Un const
 
 En Java, los miembros de clase se indican utilizando la palabra clave "static". Para llevar el registro de los valores máximos de todos los puntos creados, el código se ampliaría de la siguiente manera:
 
-  public class Punto {
-      private double x;
-      private double y;
+    public class Punto {
+        private double x;
+        private double y;
 
-      // Miembros de clase (estáticos) para rastrear máximos
-      private static double maxX = Double.NEGATIVE_INFINITY;
-      private static double maxY = Double.NEGATIVE_INFINITY;
+        // Miembros de clase (estáticos) para rastrear máximos
+        private static double maxX = Double.NEGATIVE_INFINITY;
+        private static double maxY = Double.NEGATIVE_INFINITY;
 
-      public Punto(double x, double y) {
-          this.x = x;
-          this.y = y;
-          // Actualizamos los valores de clase cada vez que se crea un punto
-          if (x > maxX) maxX = x;
-          if (y > maxY) maxY = y;
-      }
+        public Punto(double x, double y) {
+            this.x = x;
+            this.y = y;
+            // Actualizamos los valores de clase cada vez que se crea un punto
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+        }
 
-      public static double getMaxX() { return maxX; }
-      public static double getMaxY() { return maxY; }
-  }
+        public static double getMaxX() { return maxX; }
+        public static double getMaxY() { return maxY; }
+    }
 
 ## 14. Como sería un método factoría dentro de la clase `Punto` para construir un `Punto` a partir de dos coordenadas, pero que las redondee al entero más cercano. Escribe sólo el código del método, no toda la clase ¿Has usado `static`? 
 
 Un método factoría es un método estático que devuelve una instancia de la clase. El código para este requerimiento sería:
 
-  public static Punto crearPuntoRedondeado(double x, double y) {
-      double xRedondeado = Math.round(x);
-      double yRedondeado = Math.round(y);
-      return new Punto(xRedondeado, yRedondeado);
-  }
+    public static Punto crearPuntoRedondeado(double x, double y) {
+        double xRedondeado = Math.round(x);
+        double yRedondeado = Math.round(y);
+        return new Punto(xRedondeado, yRedondeado);
+    }
 
 Sí, se ha usado static. Es obligatorio usarlo porque el método debe poder ejecutarse directamente desde la clase Punto para crear un objeto, sin que necesitemos tener ya un objeto creado previamente para llamarlo.
 
@@ -142,22 +142,22 @@ Sí, se ha usado static. Es obligatorio usarlo porque el método debe poder ejec
 
 Si cambiamos la estructura interna de los datos, pero mantenemos los métodos públicos iguales, la interfaz no se ve afectada:
 
-  public class Punto {
-      // Nueva implementación interna: matriz de dos posiciones
-      private double[] coordenadas = new double[2];
+    public class Punto {
+        // Nueva implementación interna: matriz de dos posiciones
+        private double[] coordenadas = new double[2];
 
-      public Punto(double x, double y) {
-          this.coordenadas[0] = x;
-          this.coordenadas[1] = y;
-      }
+        public Punto(double x, double y) {
+            this.coordenadas[0] = x;
+            this.coordenadas[1] = y;
+        }
 
-      public double getX() { return coordenadas[0]; }
-      public double getY() { return coordenadas[1]; }
+        public double getX() { return coordenadas[0]; }
+        public double getY() { return coordenadas[1]; }
 
-      public double calcularDistanciaAOrigen() {
-          return Math.sqrt(Math.pow(coordenadas[0], 2) + Math.pow(coordenadas[1], 2));
-      }
-  }
+        public double calcularDistanciaAOrigen() {
+            return Math.sqrt(Math.pow(coordenadas[0], 2) + Math.pow(coordenadas[1], 2));
+        }
+    }
 
 Este es el poder de la encapsulación: hemos cambiado totalmente cómo se guardan los datos, pero cualquier programa que usara getX() o calcularDistanciaAOrigen() seguirá funcionando sin enterarse del cambio.
 
@@ -197,38 +197,38 @@ Los enumerados (enum) en Java tienen grandes ventajas para la encapsulación: li
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado.
 
-  public enum Mes {
-      ENERO(31, 1), FEBRERO(28, 2), MARZO(31, 3), ABRIL(30, 4),
-      MAYO(31, 5), JUNIO(30, 6), JULIO(31, 7), AGOSTO(31, 8),
-      SEPTIEMBRE(30, 9), OCTUBRE(31, 10), NOVIEMBRE(30, 11), DICIEMBRE(31, 12);
+    public enum Mes {
+        ENERO(31, 1), FEBRERO(28, 2), MARZO(31, 3), ABRIL(30, 4),
+        MAYO(31, 5), JUNIO(30, 6), JULIO(31, 7), AGOSTO(31, 8),
+        SEPTIEMBRE(30, 9), OCTUBRE(31, 10), NOVIEMBRE(30, 11), DICIEMBRE(31, 12);
 
-      private final int dias;
-      private final int ordinal;
+        private final int dias;
+        private final int ordinal;
 
-      private Mes(int dias, int ordinal) {
-          this.dias = dias;
-          this.ordinal = ordinal;
-      }
+        private Mes(int dias, int ordinal) {
+            this.dias = dias;
+            this.ordinal = ordinal;
+        }
 
-      public int getDias() { return dias; }
-      public int getOrdinal() { return ordinal; }
-  }
+        public int getDias() { return dias; }
+        public int getOrdinal() { return ordinal; }
+    }
 
 ## 24. Añade a la clase `Mes` del ejercicio anterior cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
 
-  public boolean esDeVerano(boolean enHemisferioNorte) {
-      if (enHemisferioNorte) {
-          return (this == JUNIO || this == JULIO || this == AGOSTO);
-      } else {
-          return (this == DICIEMBRE || this == ENERO || this == FEBRERO);
-      }
-  }
+    public boolean esDeVerano(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return (this == JUNIO || this == JULIO || this == AGOSTO);
+        } else {
+            return (this == DICIEMBRE || this == ENERO || this == FEBRERO);
+        }
+    }
 
-  public boolean esDeInvierno(boolean enHemisferioNorte) {
-      if (enHemisferioNorte) {
-          return (this == DICIEMBRE || this == ENERO || this == FEBRERO);
-      } else {
-          return (this == JUNIO || this == JULIO || this == AGOSTO);
-      }
-  }
-  // La lógica para Primavera y Otoño seguiría este mismo patrón de inversión.
+    public boolean esDeInvierno(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return (this == DICIEMBRE || this == ENERO || this == FEBRERO);
+        } else {
+            return (this == JUNIO || this == JULIO || this == AGOSTO);
+        }
+    }
+    // La lógica para Primavera y Otoño seguiría este mismo patrón de inversión.
