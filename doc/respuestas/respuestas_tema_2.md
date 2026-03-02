@@ -179,21 +179,56 @@ No es recomendable incluirlos por defecto. Solo se deben crear setters si realme
 
 La clase String en Java es inmutable. Cuando se concatenan dos cadenas (por ejemplo, usando +), no se modifica ninguna de las originales, sino que se crea un objeto String completamente nuevo en memoria que contiene el resultado.
 Si se van a realizar muchas concatenaciones seguidas (como construir una cadena muy larga en un bucle), esto es ineficiente. En esos casos, se debe utilizar la clase StringBuilder, que es mutable y permite modificar el contenido de forma mucho más rápida y eficiente.
+(Correcciones de clase) 
+        String elTitulo = libro.getTitulo ( );
+        elTitulo.setCharAt (0, 'A');
+        elTitulo.subString (0, 7);
+        elTitulo.append ("Añadir texto")
+Este string es inmutable, no se puede hacer el setCharAt, no puedo cambiar el valor del string, por eso no usamos el cambio de valores el setCharAt. No encontraremos métodos que nos modifiquen el valor de la cadena. Ninguna de estas líneas se podrá hacer al ser inmutable. 
+StringBuilder me permite paso a paso concatenarle a la cadena, este sí que tiene el método append para añadir texto, con todo concatenado, objeto modificable
+este es mutable, para crear strings muy grandes.
 
 ## 20. En POO ¿Cómo se comparan objetos de una misma clase? ¿Por su contenido o por su identidad? ¿Qué es el método equals en Java? ¿Qué hace por defecto? ¿Cómo se deben comparar dos cadenas en Java? 
 
 En POO, la comparación se puede hacer por identidad (si son exactamente el mismo objeto en memoria) o por contenido (si sus datos son iguales). En Java, el operador == compara la identidad.
 El método equals() se utiliza para comparar el contenido. Por defecto, en la clase Object, equals() hace lo mismo que ==, por lo que cada clase debe "sobreescribirlo" para definir qué significa que dos objetos sean iguales. Para comparar dos cadenas en Java, siempre se debe usar cadena1.equals(cadena2).
+(Correcciones de clase) 
+Cuando queremos compara objetos existen dos maneras, por identidad o por contenido:
+Consideramos que dos objetos son iguales por identidad si estamos hablando del mismo objeto guardado en memoria, comparación por identidad, es la que hace ==.
+Consideramos que dos objetos son iguales por contenido si tienen el mismo estado o el mismo valor de sus atributos, con el método equals if (obj1.equals(obj2))
+Método equals hace comparación por identidad (==), exepto en clases concretas dosde se implementa una comparación por contenido, por ejemplo en string.
 
 ## 21. ¿Qué son las clases "wrapper" en un lenguaje de programación orientado a objetos? ¿Cómo se hace? ¿Es un proceso automático? ¿Qué ventajas tienen? ¿Todos los lenguajes orientados a objetos tienen tipos primitivos y necesitan wrappers? 
 
 Las clases "wrapper" (envoltorios) son clases que representan tipos de datos primitivos como si fueran objetos (ej: Integer para int, Double para double). En Java, este proceso es automático mediante el autoboxing y unboxing.
 Su principal ventaja es que permiten usar tipos primitivos en estructuras que solo aceptan objetos, como las colecciones (ArrayList, HashMap). No todos los lenguajes los necesitan; en lenguajes como Ruby o Smalltalk, todo es ya un objeto de forma nativa.
+(Correcciones de clase)
+Wrapper, Ocurren en lenguajes que tienen tipos primitivos, por ejemplo java. Otros lenguajes no tienen tipos primitivos, como Python
+int <==> Integer, float <==> flotante, char <==> Caracteres
+Ventajas: Añadirle comportamiento, poder usarlos en contextos donde se necesitan objetos List<T>, Autoboxing/Unboxing
+        Integer i= 7i // Autoboxing
+        Integer i = newInteger(7);
+        int j = i; // Unboxing
+        int j = i.intValue ( );
 
 ## 22. ¿En POO qué es un **tipo de dato enumerado**? ¿En Java, un tipo de dato enumerado es una clase? ¿Qué ventajas tienen en términos de encapsulación los enumerados en Java?
 
 Un tipo de dato incluido es aquel que viene integrado directamente en el lenguaje (tipos primitivos). En Java, un tipo incluido (primitivo) no es una clase, aunque tenga una clase wrapper asociada.
 Los enumerados (enum) en Java tienen grandes ventajas para la encapsulación: limitan los valores posibles a un conjunto predefinido, lo que evita errores de lógica, y permiten añadir atributos y métodos propios, comportándose como clases robustas y seguras.
+(Correcciones de clase)
+Enumerado es un tipo con un número determinado de valores posibles, en java un enumerado es una clase, cuyas instancias son finitas, conocidas de antemano, y tienen un nombre cada una (valor del enumerado)
+        public enum TipoIVA {
+            GENERAL, REDUCIDO,
+
+            public double aplicar (double cant) {
+                return switch (this) {
+                    case GENERAL --> return cant * 1.21;
+                    case REDUCIDO --> return cant * 1.1;
+            }
+            private TipoIVA (double factor) {
+                this.factor = factor;
+            }
+El return de public double aplicar (double cant) {, borramos todo y dejamos solo el return cant * this.factor
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado.
 
