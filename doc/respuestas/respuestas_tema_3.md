@@ -21,41 +21,41 @@ Opción A: Valor de retorno especial. La función devuelve un valor que no sea u
 Opción B: Paso por referencia (Punteros). La función devuelve un booleano para el éxito y usa un puntero para el resultado.
 (Correcciones de clase)
 Opción A
-  float raiz (float num) {
-    if (num < 0= {
-      return -1.0;
+    float raiz (float num) {
+      if (num < 0= {
+        return -1.0;
+      }
+      return sqrt (num);
     }
-    return sqrt (num);
-  }
-  main ( ) {
-    float num = leerDeTeclado ( );
-    float resultado = raiz (num);
-    if (resultado == -1.0) {
-      println ("Error");
-    } else {
-      println ("La raiz es: %d", resultado);
+    main ( ) {
+      float num = leerDeTeclado ( );
+      float resultado = raiz (num);
+      if (resultado == -1.0) {
+        println ("Error");
+      } else {
+        println ("La raiz es: %d", resultado);
+      }
     }
-  }
 
 Opción B
-  float raiz (float num, int error) {
-    if (num < 0) {
-      *error = 1;
-      return 0;
-    } else 
-      *error = 0;
-      return sqrt (num);
-  }
-  main ( ) {
-    int error = 0
-    float num = leerDeTeclado ( )
-    float resultado = raiz (num, & error);
-    if (error != 0) {
-      println ("Error ...");
-    } else {
-      println ("%d", resultado);
+    float raiz (float num, int error) {
+      if (num < 0) {
+        *error = 1;
+        return 0;
+      } else 
+        *error = 0;
+        return sqrt (num);
     }
-  }
+    main ( ) {
+      int error = 0
+      float num = leerDeTeclado ( )
+      float resultado = raiz (num, & error);
+      if (error != 0) {
+        println ("Error ...");
+      } else {
+        println ("%d", resultado);
+      }
+    }
 
 ## 2. Brevemente ¿Qué es una **"excepción"**? ¿Con qué objetivo las usa un programador cuando implementa funciones o cuando las llama?
 
@@ -68,26 +68,26 @@ Exepción, surge en situaciones atípicas, cuando implementamos nos permite indi
 
 En este caso, la función raizdelega la responsabilidad del error al llamador.Si el número es negativo, "lanza" una excepción que el maindebe "capturar".
 (Correcciones de clase)
-  class Calculadora
-    public static double raiz (double raiz) {
-      if (num < 0.0) {
-        throw new IllegalArgumentExepcion ("num negativo");
-      } else {
-        return Math.sqrt (num);
+    class Calculadora
+      public static double raiz (double raiz) {
+        if (num < 0.0) {
+          throw new IllegalArgumentExepcion ("num negativo");
+        } else {
+          return Math.sqrt (num);
+        }
       }
-    }
-  class App {
-    main ( ) {
-      double num = leerTeclado ( );
+    class App {
+      main ( ) {
+        double num = leerTeclado ( );
 
-      try {
-      double resultado = Calculadora.raiz (num);
-      System.out.println (resultado);
-      } catch (IllegalArgumentExepcion e) {
-        System.out.println ("El número es negativo, no te preocupes, nadie es perfecto");
-      }
-  }
-  }    
+        try {
+        double resultado = Calculadora.raiz (num);
+        System.out.println (resultado);
+        } catch (IllegalArgumentExepcion e) {
+          System.out.println ("El número es negativo, no te preocupes, nadie es perfecto");
+        }
+    }
+    }    
 
 ## 4. ¿Qué es **"lanzar"** una excepción? ¿Qué es **"controlar"** o **"capturar"** una excepción? ¿Qué es que se **"propague"** una excepción? ¿Qué le va ocurriendo a las funciones en la pila de llamadas por donde se va propagando la excepción? ¿Las funciones que no la controlan se reanudan después de alguna forma? Explica con el mismo ejemplo anterior en Java de la raíz cuadrada.
 
