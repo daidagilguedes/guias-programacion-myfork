@@ -19,15 +19,75 @@ Por favor, escribe en impersonal las respuestas.
 En C, al no haber excepciones, el error debe devolverse como parte del flujo normal.
 Opción A: Valor de retorno especial. La función devuelve un valor que no sea una raíz válida (como -1.0 o NaN).
 Opción B: Paso por referencia (Punteros). La función devuelve un booleano para el éxito y usa un puntero para el resultado.
+(Correcciones de clase)
+Opción A
+  float raiz (float num) {
+    if (num < 0= {
+      return -1.0;
+    }
+    return sqrt (num);
+  }
+  main ( ) {
+    float num = leerDeTeclado ( );
+    float resultado = raiz (num);
+    if (resultado == -1.0) {
+      println ("Error");
+    } else {
+      println ("La raiz es: %d", resultado);
+    }
+  }
+
+Opción B
+  float raiz (float num, int error) {
+    if (num < 0) {
+      *error = 1;
+      return 0;
+    } else 
+      *error = 0;
+      return sqrt (num);
+  }
+  main ( ) {
+    int error = 0
+    float num = leerDeTeclado ( )
+    float resultado = raiz (num, & error);
+    if (error != 0) {
+      println ("Error ...");
+    } else {
+      println ("%d", resultado);
+    }
+  }
 
 ## 2. Brevemente ¿Qué es una **"excepción"**? ¿Con qué objetivo las usa un programador cuando implementa funciones o cuando las llama?
 
 Es un evento anormal que ocurre durante la ejecución de un programa y que interrumpe el flujo normal de las instrucciones.
 Objetivo: Separar el código de la "lógica de negocio" del código de "control de errores", permitiendo que el programa no se detenga bruscamente y pueda recuperarse.
+(Correciones de clase)
+Exepción, surge en situaciones atípicas, cuando implementamos nos permite indicar más claramente el error y cuando llamamos me facilita separar la lógica normal de la de reacción o manejo de la situación arranca.
 
 ## 3. Reescribe el mismo ejemplo de raiz, pero en Java, metiendo ese método en una clase `Calculadora` y llama a dicho método desde el método `main`, mostrando cómo se puede controlar desde fuera.
 
 En este caso, la función raizdelega la responsabilidad del error al llamador.Si el número es negativo, "lanza" una excepción que el maindebe "capturar".
+(Correcciones de clase)
+  class Calculadora
+    public static double raiz (double raiz) {
+      if (num < 0.0) {
+        throw new IllegalArgumentExepcion ("num negativo");
+      } else {
+        return Math.sqrt (num);
+      }
+    }
+  class App {
+    main ( ) {
+      double num = leerTeclado ( );
+
+      try {
+      double resultado = Calculadora.raiz (num);
+      System.out.println (resultado);
+      } catch (IllegalArgumentExepcion e) {
+        System.out.println ("El número es negativo, no te preocupes, nadie es perfecto");
+      }
+  }
+  }    
 
 ## 4. ¿Qué es **"lanzar"** una excepción? ¿Qué es **"controlar"** o **"capturar"** una excepción? ¿Qué es que se **"propague"** una excepción? ¿Qué le va ocurriendo a las funciones en la pila de llamadas por donde se va propagando la excepción? ¿Las funciones que no la controlan se reanudan después de alguna forma? Explica con el mismo ejemplo anterior en Java de la raíz cuadrada.
 
@@ -35,6 +95,8 @@ Lanzar ( throw): Es el acto de crear un objeto excepción y entregarlo al sistem
 Controlar/Capturar ( catch): Es interceptar la excepción para ejecutar un código de respuesta.
 Propagar: Si un método no captura la excepción, esta "salta" al método que lo llamó.
 En la pila de llamadas: Las funciones por donde pasa la excepción finalizan abruptamente (se sacan de la pila) y no se reanudarán a menos que haya un bloque catch.
+(Correcciones de clase)
+El error se propaga por la función 
 
 ## 5. ¿Qué ventajas tiene frente a C, la **"propagación natural"** de las excepciones a través de la pila (*stack*) de llamadas?
 
@@ -45,6 +107,8 @@ A diferencia de C, donde cada función intermedia debe comprobarse manualmente s
 Sí, en Java las excepciones son objetos (hijas de Throwable).
 Encapsulación: Permite agrupar información del error (tipo, mensaje, estado del programa) en una sola unidad.
 Personalización: Sí, podemos crear nuestras propias clases (ej. EmptyException) heredando de ExceptionoRuntimeException.
+(Correcciones de clase)
+
 
 ## 7. En relación con las ventajas de la encapsulación, comparando el ejemplo en C con Java. ¿Qué **información esencial** lleva cualquier **objeto excepción** que es muy útil tener cuando se llega a un manejador?
 
