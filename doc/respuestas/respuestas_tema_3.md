@@ -115,6 +115,10 @@ Personalización: Sí, podemos crear nuestras propias clases (ej. EmptyException
 A diferencia de un simple código de error en C, un objeto excepción en Java suele llevarse a cabo:
 Un mensaje descriptivo (String).
 El Stack Trace: Una traza de todos los métodos que estaban activos en la pila en el momento del error.
+(Correciones de clase)
+Un mensaje (getMessage ( ))
+La traza de la pila (getStackTrace, printStackTrace)
+Opcionalmente, la causa, es otra excepción que es la verdadera causa
 
 ## 8. En Java, sobre el bloque **"try-catch"**, ¿se pueden tener más de un bloque `catch`? ¿cuántos bloques `catch` se ejecutan?
 
